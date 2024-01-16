@@ -58,6 +58,17 @@ function AnimalList() {
     });
   };
 
+  const checkAnimalsInSector = (sector) => {
+    const animalsInSector = animals.filter(
+      (animal) => animal.sector === sector
+    );
+    alert(
+      `Animals in sector ${sector}:\n${animalsInSector
+        .map((animal) => animal.ime)
+        .join(", ")}`
+    );
+  };
+
   return (
     <div>
       <form onSubmit={addAnimal}>
@@ -128,6 +139,25 @@ function AnimalList() {
               <th>
                 <button onClick={() => moveToTop(index)}>Move To Top</button>
               </th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Sektori</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sectors.map((sector, index) => (
+            <tr key={index}>
+              <td>{sector}</td>
+              <td>
+                <button onClick={() => checkAnimalsInSector(sector)}>
+                  Check animals
+                </button>{" "}
+              </td>
             </tr>
           ))}
         </tbody>
