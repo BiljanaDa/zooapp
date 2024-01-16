@@ -20,6 +20,22 @@ function AnimalList() {
     );
   };
 
+  const moveToTop = (index) => {
+    // const animalToMove = animals[index];
+    // setAnimals([
+    //   animalToMove,
+    //   ...animals.slice(0, index),
+    //   ...animals.slice(index + 1),
+    // ]);
+
+    setAnimals((animals) => {
+      const updatedAnimals = [...animals];
+      const movedAnimal = updatedAnimals.splice(index, 1)[0];
+      updatedAnimals.unshift(movedAnimal);
+      return updatedAnimals;
+    });
+  };
+
   return (
     <table>
       <thead>
@@ -41,6 +57,9 @@ function AnimalList() {
             </th>
             <th>
               <button onClick={() => removeAnimal(index)}>Delete</button>
+            </th>
+            <th>
+              <button onClick={() => moveToTop(index)}>Move To Top</button>
             </th>
           </tr>
         ))}
