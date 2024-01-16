@@ -9,6 +9,17 @@ function AnimalList() {
     { vrsta: "Ptica", ime: "Raven" },
   ]);
 
+  const removeAnimal = (index) => {
+    // setAnimals([...animals.slice(0, index), ...animals.slice(index + 1)]);
+
+    // const items = animals.filter((item) => animals.indexOf(item) !== index);
+    // setAnimals([...items.slice(0, index + 1), ...items.slice(index + 1)]);
+
+    setAnimals((prevAnimals) =>
+      prevAnimals.filter((element, i) => i !== index)
+    );
+  };
+
   return (
     <table>
       <thead>
@@ -27,6 +38,9 @@ function AnimalList() {
               {animal.datumRodjenja
                 ? animal.datumRodjenja.toDateString()
                 : "Nepoznat"}
+            </th>
+            <th>
+              <button onClick={() => removeAnimal(index)}>Delete</button>
             </th>
           </tr>
         ))}
