@@ -9,15 +9,26 @@ function AnimalList() {
     { vrsta: "Ptica", ime: "Raven" },
   ]);
 
+  const sectors = ["ptice", "zmije", "sisari"];
+
   const [newAnimal, setNewAnimal] = useState([
-    { vrsta: "", ime: "", datumRodjenja: "" },
+    { vrsta: "", ime: "", datumRodjenja: "", sector: sectors[0] },
   ]);
 
   const addAnimal = (e) => {
     e.preventDefault();
-    setAnimals([...animals, newAnimal]);
+    const animalWithSector = {
+      ...newAnimal,
+      sector: newAnimal.sector || sectors[0],
+    };
+    setAnimals([...animals, animalWithSector]);
 
-    setNewAnimal({ vrsta: "", ime: "", datumRodjenja: "" });
+    setNewAnimal({
+      vrsta: "",
+      ime: "",
+      datumRodjenja: "",
+      sector: sectors[0],
+    });
   };
 
   const removeAnimal = (index) => {
@@ -50,6 +61,20 @@ function AnimalList() {
   return (
     <div>
       <form onSubmit={addAnimal}>
+        <label htmlFor="sector">Izaberite sektor:</label>
+        <select
+          id="sector"
+          value={newAnimal.sector}
+          onChange={(e) =>
+            setNewAnimal({ ...newAnimal, sector: e.target.value })
+          }
+        >
+          {sectors.map((sector, index) => (
+            <option key={index} value={sector}>
+              {sector}
+            </option>
+          ))}
+        </select>
         <label>Vrsta</label>
         <input
           type="text"
@@ -80,6 +105,7 @@ function AnimalList() {
       <table>
         <thead>
           <tr>
+            <th>Sektor:</th>
             <th>Vrsta:</th>
             <th>Ime:</th>
             <th>Datum rodjenja:</th>
@@ -88,6 +114,7 @@ function AnimalList() {
         <tbody>
           {animals.map((animal, index) => (
             <tr key={index}>
+              <th>{animal.sector ? animal.sector : "Unknown"}</th>
               <th>{animal.vrsta}</th>
               <th>{animal.ime}</th>
               <th>
