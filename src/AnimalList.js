@@ -6,7 +6,7 @@ function AnimalList() {
     { vrsta: "Macka", ime: "Garfild", datumRodjenja: new Date() },
     { vrsta: "Puz", ime: "Gari", datumRodjenja: new Date() },
     { vrsta: "Zmija", ime: "Zmi", datumRodjenja: new Date() },
-    { vrsta: "Ptica", ime: "Raven", datumRodjenja: new Date() },
+    { vrsta: "Ptica", ime: "Raven" },
   ]);
 
   return (
@@ -23,7 +23,11 @@ function AnimalList() {
           <tr key={index}>
             <th>{animal.vrsta}</th>
             <th>{animal.ime}</th>
-            <th>{animal.datumRodjenja.toDateString()}</th>
+            <th>
+              {animal.datumRodjenja
+                ? animal.datumRodjenja.toDateString()
+                : "Nepoznat"}
+            </th>
           </tr>
         ))}
       </tbody>
